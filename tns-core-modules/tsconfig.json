@@ -8,6 +8,11 @@
         "noImplicitAny": false,
         "noImplicitUseStrict": true,
         "experimentalDecorators": true,
-        "diagnostics": true
+        "diagnostics": true,
+
+        "listFiles": true,
+        "moduleResolution": "node",
+        "pretty": true,
+        "stripInternal": true
     }
 }

@@ -1,67 +1,47 @@
-﻿import common = require("./button-common");
-import utils = require("utils/utils")
-import dependencyObservable = require("ui/core/dependency-observable");
+﻿import {ButtonBase} from "./button-common";
+import {textProperty, formattedTextProperty} from "../text-base/text-base-common";
+import {FormattedString} from "text/formatted-string";
 import style = require("ui/styling/style");
-import { TextBaseStyler as TBS } from "ui/text-base/text-base-styler";
-import {device} from "platform";
-let styleHandlersInitialized: boolean;
 
-global.moduleMerge(common, exports);
+export * from "./button-common";
 
-export class Button extends common.Button {
-    private _android: android.widget.Button;
-    private _isPressed: boolean;
+@Implements([android.view.View.OnClickListener])
+class ClickListener implements android.view.View.OnClickListener {
+    constructor(public owner: WeakRef<Button>) { }
 
-    constructor() {
-        super();
-
-        this._isPressed = false;
-        if(!styleHandlersInitialized) {
-            styleHandlersInitialized = true;
-            ButtonStyler.registerHandlers();
-        }
+    public onClick(v: android.view.View): void {
+        this.owner.get()._emit(ButtonBase.tapEvent);
     }
+}
+
+@Implements([android.view.View.OnTouchListener])
+class TouchListener implements android.view.View.OnTouchListener {
+    constructor(public owner: WeakRef<Button>) { }
+
+    public onTouch(v: android.view.View, event: android.view.MotionEvent): boolean {
+        if (event.getAction() === 0) { // down
+            this.owner.get()._goToVisualState("highlighted");
+        }
+        else if (event.getAction() === 1) { // up
+            this.owner.get()._goToVisualState("normal");
+        }
+        return false;
+    }
+}
+
+export class Button extends ButtonBase {
+    nativeView: android.widget.Button;
+    private _isPressed: boolean = false;
+    private _transformationMethod;
 
     get android(): android.widget.Button {
-        return this._android;
+        return this.nativeView;
     }
 
     public _createUI() {
-
-        var that = new WeakRef(this);
-
-        this._android = new android.widget.Button(this._context);
-
-        this._android.setOnClickListener(new android.view.View.OnClickListener(
-            <utils.Owned & android.view.View.IOnClickListener>{
-                get owner() {
-                    return that.get();
-                },
-
-                onClick: function (v) {
-                    if (this.owner) {
-                        this.owner._emit(common.Button.tapEvent);
-                    }
-                }
-            }));
-
-        this._android.setOnTouchListener(new android.view.View.OnTouchListener(
-            <utils.Owned & android.view.View.IOnTouchListener>{
-                get owner() {
-                    return that.get();
-                },
-
-                onTouch: function (v, ev) {
-                    if (ev.getAction() === 0) { // down
-                        this.owner._goToVisualState("highlighted");
-                    }
-                    else if (ev.getAction() === 1) { // up
-                        this.owner._goToVisualState("normal");
-                    }
-                    return false;
-                }
-            }
-        ));
+        this.nativeView = new android.widget.Button(this._context);
+        this.nativeView.setOnClickListener(new ClickListener(new WeakRef(this)));
+        this.nativeView.setOnTouchListener(new TouchListener(new WeakRef(this)));
     }
 
     public _onTextPropertyChanged(data: dependencyObservable.PropertyChangeData) {
@@ -70,23 +50,35 @@ export class Button extends common.Button {
         }
     }
 
-    private _transformationMethod;
-    public _setFormattedTextPropertyToNative(value) {
-        var newText = value ? value._formattedText : null;
-        if (this.android) {
-            if (newText) {
-                if (!this._transformationMethod) {
-                    this._transformationMethod = this.android.getTransformationMethod();
-                }
-                this.android.setTransformationMethod(null);
-            } else {
-                if (this._transformationMethod && !this.android.getTransformationMethod()) {
-                    this.android.setTransformationMethod(this._transformationMethod);
-                }
-            }
 
-            this.android.setText(newText);
+    public _setFormattedTextPropertyToNative(value) {
+
+    }
+
+    get [textProperty.native](): string {
+        return this.nativeView.getText();
+    }
+    set [textProperty.native](value: string) {
+        this.nativeView.setText(value);
+    }
+
+    get [formattedTextProperty.native](): string {
+        return this.nativeView.getText();
+    }
+    set [formattedTextProperty.native](value: FormattedString) {
+        let newText = value ? value._formattedText : null;
+        if (newText) {
+            if (!this._transformationMethod) {
+                this._transformationMethod = this.android.getTransformationMethod();
+            }
+            this.android.setTransformationMethod(null);
+        } else {
+            if (this._transformationMethod && !this.android.getTransformationMethod()) {
+                this.android.setTransformationMethod(this._transformationMethod);
+            }
         }
+
+        this.android.setText(newText);
     }
 }
 

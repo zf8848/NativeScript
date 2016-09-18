@@ -26,7 +26,7 @@
                 public getBackgroundPosition(): string;
                 public getBackgroundSize(): string;
             }
-            
+
             export class CSSValue {
                 constructor(type: string, str: string, unit: string, value: number);
                 public getType(): string;
@@ -34,7 +34,7 @@
                 public getUnit(): string;
                 public getValue(): number;
             }
-            
+
             export class CommonLayoutParams extends android.widget.FrameLayout.LayoutParams {
                 constructor();
 
@@ -56,9 +56,6 @@
 
                 public rowSpan: number;
                 public columnSpan: number;
-
-                public horizontalAlignment: HorizontalAlignment;
-                public verticalAlignment: VerticalAlignment;
             }
 
             export enum Stretch {
@@ -66,20 +63,6 @@
                 aspectFill,
                 aspectFit,
                 fill
-            }
-
-            export enum HorizontalAlignment {
-                left,
-                center,
-                right,
-                stretch
-            }
-
-            export enum VerticalAlignment {
-                top,
-                center,
-                bottom,
-                stretch
             }
 
             export enum Dock {
@@ -99,7 +82,7 @@
                 horizontal,
                 vertical
             }
-            
+
             export class OriginPoint {
                 public static setX(view: android.view.View, value: number);
                 public static setY(view: android.view.View, value: number);
@@ -209,11 +192,79 @@
                 iconId: number;
                 iconDrawable: android.graphics.drawable.Drawable;
             }
+
+            export class ViewHelper {
+                public static getMinWidth(view: android.view.View): number;
+                public static setMinWidth(view: android.view.View, value: number);
+
+                public static getMinHeight(view: android.view.View): number;
+                public static setMinHeight(view: android.view.View, value: number);
+
+                public static getWidth(view: android.view.View): number;
+                public static setWidth(view: android.view.View, value: number);
+
+                public static getHeight(view: android.view.View): number;
+                public static setHeight(view: android.view.View, value: number);
+
+                public static getMargin(view: android.view.View): { left: number, top: number, right: number, bottom: number };
+                public static setMargin(view: android.view.View, left: number, top: number, right: number, bottom: number);
+
+                public static getMarginLeft(view: android.view.View): number;
+                public static setMarginLeft(view: android.view.View, value): number;
+
+                public static getMarginTop(view: android.view.View): number;
+                public static setMarginTop(view: android.view.View, value: number);
+
+                public static getMarginRight(view: android.view.View): number;
+                public static setMarginRight(view: android.view.View, value: number);
+
+                public static getMarginBottom(view: android.view.View): number;
+                public static setMarginBottom(view: android.view.View, value: number);
+
+                public static getHorizontalAlighment(view: android.view.View): string;
+                public static setHorizontalAlighment(view: android.view.View, value: string);
+
+                public static getVerticalAlignment(view: android.view.View): string;
+                public static setVerticalAlignment(view: android.view.View, value: string);
+
+                public static getPadding(view: android.view.View): { left: number, top: number, right: number, bottom: number };
+                public static setPadding(view: android.view.View, left: number, top: number, right: number, bottom: number);
+
+                public static getPaddingLeft(view: android.view.View): number;
+                public static setPaddingLeft(view: android.view.View, value: number);
+
+                public static getPaddingTop(view: android.view.View): number;
+                public static setPaddingTop(view: android.view.View, value: number);
+
+                public static getPaddingRight(view: android.view.View): number;
+                public static setPaddingRight(view: android.view.View, value: number);
+
+                public static getPaddingBottom(view: android.view.View): number;
+                public static setPaddingBottom(view: android.view.View, value: number);
+
+                public static getRotate(view: android.view.View): number;
+                public static setRotate(view: android.view.View, value: number);
+
+                public static getScaleX(view: android.view.View): number;
+                public static setScaleX(view: android.view.View, value): number;
+
+                public static getScaleY(view: android.view.View): number;
+                public static setScaleY(view: android.view.View, value): number;
+
+                public static getTranslateX(view: android.view.View): number;
+                public static setTranslateX(view: android.view.View, value): number;
+
+                public static getTranslateY(view: android.view.View): number;
+                public static setTranslateY(view: android.view.View, value): number;
+
+                public static getZIndex(view: android.view.View): number;
+                public static setZIndex(view: android.view.View, value): number;
+            }
         }
     }
 }
 
 declare class TNSLabel extends UILabel {
-	borderThickness: UIEdgeInsets;
-	padding: UIEdgeInsets;
+    borderThickness: UIEdgeInsets;
+    padding: UIEdgeInsets;
 }

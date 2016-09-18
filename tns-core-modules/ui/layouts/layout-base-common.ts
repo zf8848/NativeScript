@@ -163,7 +163,7 @@ export class LayoutBase extends view.CustomLayoutView implements definition.Layo
         
         this._eachChildView((cv) => {
             cv._eachLayoutView((lv) => {
-                if (lastChild && lastChild._isVisible) {
+                if (lastChild && lastChild.isVisible) {
                     callback(lastChild, false);
                 }
 
@@ -173,7 +173,7 @@ export class LayoutBase extends view.CustomLayoutView implements definition.Layo
             return true;
         });
         
-        if (lastChild && lastChild._isVisible) {
+        if (lastChild && lastChild.isVisible) {
             callback(lastChild, true);
         }
 
