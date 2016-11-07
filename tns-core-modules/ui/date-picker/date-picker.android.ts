@@ -93,7 +93,7 @@ export class DatePicker extends common.DatePicker {
         var that = new WeakRef(this);
 
         this._listener = new android.widget.DatePicker.OnDateChangedListener(
-            <utils.Owned & android.widget.DatePicker.IOnDateChangedListener>{
+            <utils.Owned & android.widget.DatePicker.OnDateChangedListener>{
             get owner() {
                 return that.get();
             },

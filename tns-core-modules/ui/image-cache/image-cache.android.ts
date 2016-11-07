@@ -6,13 +6,13 @@ function ensureLruBitmapCacheClass() {
         return;
     }
 
-    class LruBitmapCache extends android.util.LruCache<string, android.graphics.Bitmap> {
+    class LruBitmapCache extends android.util.LruCache {
         constructor(cacheSize: number) {
             super(cacheSize);
             return global.__native(this);
         }
 
-        protected sizeOf(key: string, bitmap: android.graphics.Bitmap): number {
+        public sizeOf(key: any, bitmap: android.graphics.Bitmap): number {
             // The cache size will be measured in kilobytes rather than
             // number of items.
             var result = Math.round(bitmap.getByteCount() / 1024);
@@ -30,7 +30,7 @@ function ensureLruBitmapCacheClass() {
 
 export class Cache extends common.Cache {
     private _callback: any;
-    private _cache: android.util.LruCache<string, android.graphics.Bitmap>;
+    private _cache: android.util.LruCache;
 
     constructor() {
         super();
@@ -56,16 +56,16 @@ export class Cache extends common.Cache {
     }
 
     public get(key: string): any {
-        var result = this._cache.get(key);
+        var result = this._cache.get(<any> key);
         return result;
     }
 
     public set(key: string, image: any): void {
-        this._cache.put(key, image);
+        this._cache.put(<any> key, image);
     }
 
     public remove(key: string): void {
-        this._cache.remove(key);
+        this._cache.remove(<any> key);
     }
 
     public clear() {

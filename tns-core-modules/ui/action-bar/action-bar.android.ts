@@ -126,7 +126,7 @@ export class ActionBar extends common.ActionBar {
         this._toolbar = new android.support.v7.widget.Toolbar(this._context);
         let ownerRef = new WeakRef(this);
         this._toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener({
-            onMenuItemClick: function (item: android.view.IMenuItem): boolean {
+            onMenuItemClick: function (item: android.view.MenuItem): boolean {
                 let ownerValue = ownerRef.get();
                 if (!ownerValue) {
                     return false;

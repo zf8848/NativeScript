@@ -127,7 +127,7 @@ export class SearchBar extends common.SearchBar {
         this._android.setIconified(false);
 
         var that = new WeakRef(this);
-        this._android.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener(<utils.Owned & android.widget.SearchView.IOnQueryTextListener>{
+        this._android.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener(<utils.Owned & android.widget.SearchView.OnQueryTextListener>{
             get owner() {
                 return that.get();
             },
@@ -158,7 +158,7 @@ export class SearchBar extends common.SearchBar {
             }
         }));
 
-        this._android.setOnCloseListener(new android.widget.SearchView.OnCloseListener(<utils.Owned & android.widget.SearchView.IOnCloseListener>{
+        this._android.setOnCloseListener(new android.widget.SearchView.OnCloseListener(<utils.Owned & android.widget.SearchView.OnCloseListener>{
             get owner() {
                 return that.get();
             },

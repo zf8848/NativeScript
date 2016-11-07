@@ -14,9 +14,9 @@ const TO_DEGREES = (180 / Math.PI);
 
 export class GesturesObserver extends common.GesturesObserver {
     private _notifyTouch: boolean;
-    private _simpleGestureDetector: android.view.GestureDetector;
+    private _simpleGestureDetector: android.support.v4.view.GestureDetectorCompat;
     private _scaleGestureDetector: android.view.ScaleGestureDetector;
-    private _swipeGestureDetector: android.view.GestureDetector;
+    private _swipeGestureDetector: android.support.v4.view.GestureDetectorCompat;
     private _panGestureDetector: CustomPanGestureDetector;
     private _rotateGestureDetector: CustomRotateGestureDetector;
 

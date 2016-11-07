@@ -26,7 +26,7 @@ export class ListPicker extends common.ListPicker {
         var that = new WeakRef(this);
 
         this._formatter = new android.widget.NumberPicker.Formatter(
-            <utils.Owned & android.widget.NumberPicker.IFormatter>{
+            <utils.Owned & android.widget.NumberPicker.Formatter>{
                 get owner(): ListPicker {
                     return that.get();
                 },
@@ -41,7 +41,7 @@ export class ListPicker extends common.ListPicker {
             });
         this._android.setFormatter(this._formatter);
 
-        this._valueChangedListener = new android.widget.NumberPicker.OnValueChangeListener(<utils.Owned & android.widget.NumberPicker.IOnValueChangeListener>{
+        this._valueChangedListener = new android.widget.NumberPicker.OnValueChangeListener(<utils.Owned & android.widget.NumberPicker.OnValueChangeListener>{
             get owner() {
                 return that.get();
             },

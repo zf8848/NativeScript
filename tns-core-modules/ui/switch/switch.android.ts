@@ -31,7 +31,7 @@ export class Switch extends common.Switch {
 
         var that = new WeakRef(this);
 
-        this._android.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener(<utils.Owned & android.widget.CompoundButton.IOnCheckedChangeListener>{
+        this._android.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener(<utils.Owned & android.widget.CompoundButton.OnCheckedChangeListener>{
             get owner() {
                 return that.get();
             },

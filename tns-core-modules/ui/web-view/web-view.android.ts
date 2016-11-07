@@ -27,7 +27,7 @@ function ensureWebViewClientClass() {
             return global.__native(this);
         }
 
-        public shouldOverrideUrlLoading(view: android.webkit.WebView, url: string) {
+        public shouldOverrideUrlLoading(view: android.webkit.WebView, url: any) {
             if (trace.enabled) {
                 trace.write("WebViewClientClass.shouldOverrideUrlLoading(" + url + ")", trace.categories.Debug);
             }

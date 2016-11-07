@@ -16,7 +16,7 @@
                 }
 
                 export module Http {
-                    export class KeyValuePair {
+                    export class KeyValuePair extends java.lang.Object {
                         public key: string;
                         public value: string;
                         constructor(key: string, value: string);
@@ -25,7 +25,7 @@
                     export class RequestOptions {
                         public url: string;
                         public method: string;
-                        public headers: java.util.ArrayList<KeyValuePair>;
+                        public headers: java.util.ArrayList;
                         public content: string;
                         public timeout: number;
                         public screenWidth: number;
@@ -34,7 +34,7 @@
 
                     export class RequestResult {
                         public raw: java.io.ByteArrayOutputStream;
-                        public headers: java.util.ArrayList<KeyValuePair>;
+                        public headers: java.util.ArrayList;
                         public statusCode: number;
                         public responseAsString: string;
                         public responseAsImage: android.graphics.Bitmap;
@@ -345,8 +345,8 @@
 
             export class TabLayout extends android.widget.HorizontalScrollView {
                 constructor(context: android.content.Context);
-                constructor(context: android.content.Context, attrs: android.util.IAttributeSet);
-                constructor(context: android.content.Context, attrs: android.util.IAttributeSet, defStyle: number);
+                constructor(context: android.content.Context, attrs: android.util.AttributeSet);
+                constructor(context: android.content.Context, attrs: android.util.AttributeSet, defStyle: number);
 
                 setSelectedIndicatorColors(color: Array<number>): void;
                 getSelectedIndicatorColors(): Array<number>;

@@ -10,7 +10,7 @@ let dismissKeyboardTimeoutId: number;
 export class EditableTextBase extends common.EditableTextBase {
     private _android: android.widget.EditText;
     private _textWatcher: android.text.TextWatcher;
-    private _keyListenerCache: android.text.method.IKeyListener;
+    private _keyListenerCache: android.text.method.KeyListener;
     /* tslint:disable */
     private _dirtyTextAccumulator: string;
     /* tslint:enable */
@@ -45,7 +45,7 @@ export class EditableTextBase extends common.EditableTextBase {
                 owner.android.addTextChangedListener(owner._textWatcher);
                 owner.android.setSelection(selectionStart);
             },
-            afterTextChanged: function (editable: android.text.IEditable) {
+            afterTextChanged: function (editable: android.text.Editable) {
                 var owner = that.get();
                 if (!owner) {
                     return;

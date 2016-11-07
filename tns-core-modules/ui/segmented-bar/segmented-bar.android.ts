@@ -195,7 +195,7 @@ function ensureTabHostClass() {
             return global.__native(this);
         }
 
-        protected onAttachedToWindow(): void {
+        public onAttachedToWindow(): void {
             // overriden to remove the code that will steal the focus from edit fields.
         }
     }

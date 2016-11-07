@@ -17,7 +17,7 @@ export class TimePicker extends common.TimePicker {
         var that = new WeakRef(this);
 
         this._listener = new android.widget.TimePicker.OnTimeChangedListener(
-            <Owned & android.widget.TimePicker.IOnTimeChangedListener>{
+            <Owned & android.widget.TimePicker.OnTimeChangedListener>{
                 get owner() {
                     return that.get();
                 },

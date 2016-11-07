@@ -169,7 +169,7 @@ export module ad {
                     if(clazz) {
                         let method = clazz.getMethod("currentApplication", null);
                         if(method) {
-                            nativeApp = method.invoke(null, null);
+                            nativeApp = <android.app.Application> method.invoke(null, null);
                         }
                     }
                 }
@@ -211,11 +211,11 @@ export module ad {
     }
 
     export module collections {
-        export function stringArrayToStringSet(str: string[]): java.util.HashSet<string> {
-            var hashSet = new java.util.HashSet<string>();
+        export function stringArrayToStringSet(str: string[]): java.util.HashSet {
+            var hashSet = new java.util.HashSet();
             if ("undefined" !== typeof str) {
                 for (var element in str) {
-                    hashSet.add('' + str[element]);
+                    hashSet.add(<any>('' + str[element]));
                 }
             }
             return hashSet;

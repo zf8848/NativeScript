@@ -33,7 +33,7 @@ export class Button extends common.Button {
         this._android = new android.widget.Button(this._context);
 
         this._android.setOnClickListener(new android.view.View.OnClickListener(
-            <utils.Owned & android.view.View.IOnClickListener>{
+            <utils.Owned & android.view.View.OnClickListener>{
                 get owner() {
                     return that.get();
                 },
@@ -46,7 +46,7 @@ export class Button extends common.Button {
             }));
 
         this._android.setOnTouchListener(new android.view.View.OnTouchListener(
-            <utils.Owned & android.view.View.IOnTouchListener>{
+            <utils.Owned & android.view.View.OnTouchListener>{
                 get owner() {
                     return that.get();
                 },

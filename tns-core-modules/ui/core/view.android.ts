@@ -28,7 +28,7 @@ function onAutomationTextPropertyChanged(data: dependencyObservable.PropertyChan
 
 function onIdPropertyChanged(data: dependencyObservable.PropertyChangeData) {
     var view = <View>data.object;
-    view._nativeView.setTag(data.newValue + "");
+    view._nativeView.setTag(<any> (data.newValue + ""));
 }
 (<proxy.PropertyMetadata>viewCommon.View.idProperty.metadata).onSetNativeValue = onIdPropertyChanged;
 

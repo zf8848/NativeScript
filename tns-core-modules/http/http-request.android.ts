@@ -65,7 +65,7 @@ function onRequestComplete(requestId: number, result: org.nativescript.widgets.A
         var i;
         var pair: org.nativescript.widgets.Async.Http.KeyValuePair;
         for (i = 0; i < length; i++) {
-            pair = jHeaders.get(i);
+            pair = <org.nativescript.widgets.Async.Http.KeyValuePair> jHeaders.get(i);
             
             (<any>http).addHeader(headers, pair.key, pair.value);
         }
@@ -145,7 +145,7 @@ function buildJavaOptions(options: http.HttpRequestOptions) {
     }
 
     if (options.headers) {
-        var arrayList = new java.util.ArrayList<org.nativescript.widgets.Async.Http.KeyValuePair>();
+        var arrayList = new java.util.ArrayList();
         var pair = org.nativescript.widgets.Async.Http.KeyValuePair;
 
         for (var key in options.headers) {

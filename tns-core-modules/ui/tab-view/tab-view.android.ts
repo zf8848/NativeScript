@@ -120,7 +120,7 @@ function ensurePagerAdapterClass() {
             }
 
             if (!this[VIEWS_STATES]) {
-                this[VIEWS_STATES] = new android.util.SparseArray<android.os.Parcelable>();
+                this[VIEWS_STATES] = new android.util.SparseArray();
             }
             var viewStates = this[VIEWS_STATES];
             var childCallback = function (view: view.View): boolean {

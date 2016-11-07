@@ -85,7 +85,7 @@ function ensureDialogFragmentClass() {
 
         }
 
-        public onDismiss(dialog: android.content.IDialogInterface) {
+        public onDismiss(dialog: android.content.DialogInterface) {
             super.onDismiss(dialog);
             this._dismissCallback();
         }
