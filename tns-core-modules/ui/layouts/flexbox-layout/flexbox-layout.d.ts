@@ -67,6 +67,23 @@ declare module "ui/layouts/flexbox-layout" {
     }
 
     /**
+     * A flex-basis value. Negative values are invalid.
+     */
+    export type FlexBasis = "auto" | "content" | number;
+    export namespace FlexBasis {
+        /**
+         * Default. Indicates the item's main size (width or height) property will be used as flex-basis.
+         */
+        export const AUTO: "auto";
+        /**
+         * Indicates automatic sizing, based on the flex item’s content.
+         */
+        export const CONTENT: "content";
+        export function isValue(value: any): boolean;
+        export function parse(value: string): FlexShrink;
+    }
+
+    /**
      * A flex-grow number. Negative values are invalid.
      */
     export type FlexGrow = number;

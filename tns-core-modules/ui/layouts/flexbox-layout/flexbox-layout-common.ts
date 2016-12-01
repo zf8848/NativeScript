@@ -105,6 +105,26 @@ export namespace Order {
     export const parse = parseInt;
 }
 
+export type FlexBasis = "auto" | "content" | number;
+export namespace FlexBasis {
+    export const AUTO = "auto";
+    export const CONTENT = "content";
+    export function isValid(value: any): boolean {
+        var lowercased = value && value.toString().trim().toLowerCase();
+        if (lowercased === "auto" || lowercased === "content") {
+            return true;
+        }
+        const parsed = parseInt(value);
+        return isFinite(parsed) && value >= 0;
+    }
+    export function parse(value: string): FlexBasis {
+        if (value && value.toString().trim().toLowerCase() === "auto") {
+            return "auto";
+        }
+        return parseInt(value);
+    }
+}
+
 export type FlexGrow = number;
 export namespace FlexGrow {
     export function isValid(value: any): boolean {
@@ -211,6 +231,13 @@ export abstract class FlexboxLayoutBase extends LayoutBase {
         return validateArgs(view).style._getValue(orderProperty);
     }
 
+    public static setFlexBasis(view: View, basis: FlexBasis) {
+        validateArgs(view).style._setValue(flexBasisProperty, basis);
+    }
+    public static getFlexBasis(view: View): FlexBasis {
+        return validateArgs(view).style._getValue(flexBasisProperty);
+    }
+
     public static setFlexGrow(view: View, grow: number) {
         validateArgs(view).style._setValue(flexGrowProperty, grow);
     }
@@ -255,6 +282,7 @@ export const alignItemsProperty = new styleProperty.Property("alignItems", "alig
 export const alignContentProperty = new styleProperty.Property("alignContent", "align-content", new PropertyMetadata(AlignContent.STRETCH, flexboxAffectsLayout, undefined, AlignContent.isValid), AlignContent.parse);
 
 export const orderProperty = new styleProperty.Property("order", "order", new PropertyMetadata(ORDER_DEFAULT, PropertyMetadataSettings.None, undefined, Order.isValid), Order.parse);
+export const flexBasisProperty = new styleProperty.Property("flexBasis", "flex-basis", new PropertyMetadata(FlexBasis.AUTO, PropertyMetadataSettings.None, undefined, FlexBasis.isValid), FlexBasis.parse);
 export const flexGrowProperty = new styleProperty.Property("flexGrow", "flex-grow", new PropertyMetadata(FLEX_GROW_DEFAULT, PropertyMetadataSettings.None, undefined, FlexGrow.isValid), FlexGrow.parse);
 export const flexShrinkProperty = new styleProperty.Property("flexShrink", "flex-shrink", new PropertyMetadata(FLEX_SHRINK_DEFAULT, PropertyMetadataSettings.None, undefined, FlexShrink.isValid), FlexShrink.parse);
 export const flexWrapBeforeProperty = new styleProperty.Property("flexWrapBefore", "flex-wrap-before", new PropertyMetadata(false, PropertyMetadataSettings.None, undefined, FlexWrapBefore.isValid), FlexWrapBefore.parse);
@@ -262,6 +290,9 @@ export const alignSelfProperty = new styleProperty.Property("alignSelf", "align-
 
 registerSpecialProperty("order", (instance, propertyValue) => {
     FlexboxLayoutBase.setOrder(instance, !isNaN(+propertyValue) && +propertyValue);
+});
+registerSpecialProperty("flexBasis", (instance, propertyValue) => {
+    FlexboxLayoutBase.setFlexBasis(instance, isString(propertyValue) ? FlexBasis.parse(propertyValue) : propertyValue)
 });
 registerSpecialProperty("flexGrow", (instance, propertyValue) => {
     FlexboxLayoutBase.setFlexGrow(instance, !isNaN(+propertyValue) && +propertyValue);
