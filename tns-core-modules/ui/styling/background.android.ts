@@ -1,7 +1,7 @@
 import { View } from "./background-common";
 import { isNullOrUndefined, isFunction, getClass } from "utils/types";
 import { CacheLayerType } from "utils/utils";
-import cssValue = require("css-value");
+import * as cssValue from "css-value";
 
 export * from "./background-common"
 

@@ -1,9 +1,9 @@
-﻿import definition = require("ui/core/bindable");
+﻿import * as definition from "ui/core/bindable";
 import { Observable, PropertyChangeData } from "data/observable";
 import { unsetValue, DependencyObservable, Property, PropertyMetadata, PropertyMetadataSettings, PropertyChangeData as DependencyPropertyChangeData } from "ui/core/dependency-observable";
 import { addWeakEventListener, removeWeakEventListener } from "ui/core/weak-event-listener";
-import types = require("utils/types");
-import bindingBuilder = require("../builder/binding-builder");
+import * as types from "utils/types";
+import * as bindingBuilder from "../builder/binding-builder";
 import { ViewBase, isEventOrGesture } from "ui/core/view-base";
 import * as application from "application";
 import * as polymerExpressions from "js-libs/polymer-expressions";
